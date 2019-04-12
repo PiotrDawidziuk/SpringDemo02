@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import javax.imageio.ImageIO;
 
@@ -26,12 +28,15 @@ public class JoinImageController {
 		
 		String url1 = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Toddy_Dog.jpg";
 		String url2 = "https://vignette.wikia.nocookie.net/uncyclopedia/images/b/be/Cat.JPG";
+		String url3 = "https://vignette.wikia.nocookie.net/uncyclopedia/images/b/be/Cat.JPG";
 		
 		BufferedImage img1 = ImageIO.read(new URL(url1));
 		BufferedImage img2 = ImageIO.read(new URL(url2));
+		BufferedImage img3 = ImageIO.read(new URL(url3));
 		ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
 		imgList.add(img1);
-		//imgList.add(img2);
+		imgList.add(img2);
+		imgList.add(img3);
 		
 		BufferedImage joinedImg = joinBufferedImage(imgList);
 		
@@ -55,7 +60,6 @@ public class JoinImageController {
     		BufferedImage img2= img.get(1);
     		
 	    	int offset = 2;
-	    	
        	    int width = img1.getWidth() + img2.getWidth() + offset;
     	    int height = Math.max(img1.getHeight(), img2.getHeight()) + offset;
     	    newImage = new BufferedImage(width, height,
@@ -68,6 +72,25 @@ public class JoinImageController {
     	    g2.drawImage(img1, null, 0, 0);
     	    g2.drawImage(img2, null, img1.getWidth() + offset, 0);
     	    g2.dispose();
+    	    } else if (img.size()==3) {
+    	    	BufferedImage img1= img.get(0);
+        		BufferedImage img2= img.get(1);
+        		BufferedImage img3= img.get(2);
+        		
+    	    	int offset = 2;
+           	    int width = img1.getWidth() + img2.getWidth() + img3.getWidth() + offset;
+        	    int height = Collections.max(Arrays.asList(img1.getHeight(),img2.getHeight(),img3.getHeight())) + offset;
+        	    newImage = new BufferedImage(width, height,
+        	        BufferedImage.TYPE_INT_BGR);
+        	    Graphics2D g2 = newImage.createGraphics();
+        	    Color oldColor = g2.getColor();
+        	    g2.setPaint(Color.BLACK);
+        	    g2.fillRect(0, 0, width, height);
+        	    g2.setColor(oldColor);
+        	    g2.drawImage(img1, null, 0, 0);
+        	    g2.drawImage(img2, null, img1.getWidth() + offset, 0);
+        	    g2.drawImage(img3, null, img1.getWidth()+img2.getWidth() + offset, 0);
+        	    g2.dispose();
     	    }
    
     	    
