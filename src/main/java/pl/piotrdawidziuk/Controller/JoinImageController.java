@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -28,7 +29,11 @@ public class JoinImageController {
 		
 		BufferedImage img1 = ImageIO.read(new URL(url1));
 		BufferedImage img2 = ImageIO.read(new URL(url2));
-		BufferedImage joinedImg = joinBufferedImage(img1, img2);
+		ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
+		imgList.add(img1);
+		//imgList.add(img2);
+		
+		BufferedImage joinedImg = joinBufferedImage(imgList);
 		
 		
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -38,12 +43,22 @@ public class JoinImageController {
     	return IOUtils.toByteArray(in);
     }
 	
-    public static BufferedImage joinBufferedImage(BufferedImage img1,
-    	      BufferedImage img2) {
-    	    int offset = 2;
-    	    int width = img1.getWidth() + img2.getWidth() + offset;
+    public static BufferedImage joinBufferedImage(ArrayList<BufferedImage> img) {
+    	
+    		BufferedImage newImage = null;
+    	
+    		if (img.size()==1) {
+    			newImage = img.get(0);
+    		} 
+    		else if (img.size()==2) {
+    		BufferedImage img1= img.get(0);
+    		BufferedImage img2= img.get(1);
+    		
+	    	int offset = 2;
+	    	
+       	    int width = img1.getWidth() + img2.getWidth() + offset;
     	    int height = Math.max(img1.getHeight(), img2.getHeight()) + offset;
-    	    BufferedImage newImage = new BufferedImage(width, height,
+    	    newImage = new BufferedImage(width, height,
     	        BufferedImage.TYPE_INT_BGR);
     	    Graphics2D g2 = newImage.createGraphics();
     	    Color oldColor = g2.getColor();
@@ -53,6 +68,8 @@ public class JoinImageController {
     	    g2.drawImage(img1, null, 0, 0);
     	    g2.drawImage(img2, null, img1.getWidth() + offset, 0);
     	    g2.dispose();
+    	    }
+   
     	    
     	    return newImage;
     	  }
