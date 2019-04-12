@@ -20,15 +20,13 @@ public class DataProducerController {
 
     @GetMapping("/get-image")
     public @ResponseBody byte[] getImage() throws IOException {
-        final InputStream in = getClass().getResourceAsStream("https://vignette.wikia.nocookie.net/uncyclopedia/images/b/be/Cat.JPG");
+    	InputStream in = new URL("https://vignette.wikia.nocookie.net/uncyclopedia/images/b/be/Cat.JPG").openStream();  
         return IOUtils.toByteArray(in);
     }
 
     @GetMapping(value = "/get-image-with-media-type", produces = MediaType.IMAGE_JPEG_VALUE)
     public @ResponseBody byte[] getImageWithMediaType() throws IOException {
     	InputStream in = new URL("https://vignette.wikia.nocookie.net/uncyclopedia/images/b/be/Cat.JPG").openStream();  
-
-    	//final InputStream in = getClass().getResourceAsStream("https://vignette.wikia.nocookie.net/uncyclopedia/images/b/be/Cat.JPG");
         return IOUtils.toByteArray(in);
     }
 
