@@ -43,9 +43,9 @@ public class JoinImageController {
 		ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
 		imgList.add(img1);
 		imgList.add(img2);
+		//imgList.add(img3);
 		imgList.add(img3);
-		imgList.add(img3);
-		imgList.add(img3);
+		imgList.add(img1);
 
 		
 		BufferedImage joinedImg = joinBufferedImage(imgList);
@@ -117,10 +117,10 @@ public class JoinImageController {
         		
     	    	int offset = 2;
            	    
-    	    	int width = Collections.max(Arrays.asList ((img1.getWidth() + img2.getWidth()), (img3.getWidth() + img4.getWidth())) ) + offset;
+    	    	int width = (Collections.max(Arrays.asList(img1.getWidth(),img3.getWidth())) + (Collections.max(Arrays.asList(img2.getWidth(),img4.getWidth())) + offset*2));
            	    
            	    
-        	    int height = Collections.max(Arrays.asList ((img1.getHeight() + img3.getHeight()), (img2.getHeight() + img4.getHeight())) ) + offset;
+        	    int height = (Collections.max(Arrays.asList(img1.getHeight(),img2.getHeight())) + (Collections.max(Arrays.asList(img3.getHeight(),img4.getHeight())) + offset*2));
         	    newImage = new BufferedImage(width, height,
         	        BufferedImage.TYPE_INT_BGR);
         	    Graphics2D g2 = newImage.createGraphics();
@@ -146,6 +146,7 @@ public class JoinImageController {
            	    
            	    
         	    int height = Collections.max(Arrays.asList ((img1.getHeight() + img4.getHeight()), (img2.getHeight() + img5.getHeight()), img3.getHeight()) ) + offset;
+        	    
         	    newImage = new BufferedImage(width, height,
         	        BufferedImage.TYPE_INT_BGR);
         	    Graphics2D g2 = newImage.createGraphics();
