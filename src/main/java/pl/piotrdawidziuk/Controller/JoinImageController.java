@@ -45,6 +45,7 @@ public class JoinImageController {
 		imgList.add(img2);
 		imgList.add(img3);
 		imgList.add(img3);
+		imgList.add(img3);
 
 		
 		BufferedImage joinedImg = joinBufferedImage(imgList);
@@ -129,6 +130,35 @@ public class JoinImageController {
         	    g2.drawImage(img2, null, img1.getWidth() + offset, 0);
         	    g2.drawImage(img3, null, 0, Collections.max(Arrays.asList(img1.getHeight(),img2.getHeight())) + offset);
         	    g2.drawImage(img4, null, img1.getWidth() + offset, Collections.max(Arrays.asList(img1.getHeight(),img2.getHeight())) + offset);
+        	    g2.dispose();
+    	    	
+    	    } else if (img.size()==5) {
+    	    	
+    	    	BufferedImage img1= img.get(0);
+        		BufferedImage img2= img.get(1);
+        		BufferedImage img3= img.get(2);
+        		BufferedImage img4 = img.get(3);
+        		BufferedImage img5 = img.get(4);
+        		
+    	    	int offset = 2;
+           	    
+    	    	int width = Collections.max(Arrays.asList ((img1.getWidth() + img2.getWidth() + img3.getWidth()), (img4.getWidth() + img5.getWidth())) ) + offset;
+           	    
+           	    
+        	    int height = Collections.max(Arrays.asList ((img1.getHeight() + img4.getHeight()), (img2.getHeight() + img5.getHeight()), img3.getHeight()) ) + offset;
+        	    newImage = new BufferedImage(width, height,
+        	        BufferedImage.TYPE_INT_BGR);
+        	    Graphics2D g2 = newImage.createGraphics();
+        	    
+        	    setColorToGraphics(g2,width,height);
+        	    g2.drawImage(img1, null, 0, 0);
+        	    g2.drawImage(img2, null, img1.getWidth() + offset, 0);
+        	    g2.drawImage(img3, null, img1.getWidth()+img2.getWidth() + offset, 0);
+
+        	    g2.drawImage(img4, null, 0, Collections.max(Arrays.asList(img1.getHeight(),img2.getHeight())) + offset);
+        	    g2.drawImage(img5, null, img1.getWidth() + offset, Collections.max(Arrays.asList(img1.getHeight(),img2.getHeight())) + offset);
+        	    
+        	    
         	    g2.dispose();
     	    	
     	    }
