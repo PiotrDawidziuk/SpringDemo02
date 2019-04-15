@@ -49,6 +49,8 @@ public class JoinImageController {
 		imgList.add(img1);
 		imgList.add(img2);
 		imgList.add(img2);
+		
+		Collections.shuffle(imgList);
 
 		
 		BufferedImage joinedImg = joinBufferedImage(imgList);
@@ -80,12 +82,7 @@ public class JoinImageController {
     	    Graphics2D g2 = newImage.createGraphics();
     	    
     	    setColorToGraphics(g2,width,height);
-    	    
-//    	    Color oldColor = g2.getColor();
-//    	    g2.setPaint(Color.BLACK);
-//    	    g2.fillRect(0, 0, width, height);
-//    	    g2.setColor(oldColor);
-//    	    
+    	        
     	    g2.drawImage(img1, null, 0, 0);
     	    g2.drawImage(img2, null, img1.getWidth() + offset, 0);
     	    g2.dispose();
@@ -102,10 +99,6 @@ public class JoinImageController {
         	    Graphics2D g2 = newImage.createGraphics();
         	    
         	    setColorToGraphics(g2,width,height);
-//        	    Color oldColor = g2.getColor();
-//        	    g2.setPaint(Color.BLACK);
-//        	    g2.fillRect(0, 0, width, height);
-//        	    g2.setColor(oldColor);
         	    
         	    g2.drawImage(img1, null, 0, 0);
         	    g2.drawImage(img2, null, img1.getWidth() + offset, 0);
