@@ -55,6 +55,7 @@ public class JoinImageController {
 		
 		BufferedImage joinedImg = joinBufferedImage(imgList);
 		
+		joinedImg = resizeImage(joinedImg, 2048, 2048);
 		
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		ImageIO.write(joinedImg, "jpg", os);
@@ -257,6 +258,14 @@ public class JoinImageController {
     	    return newImage;
     	  }
     
-  
+   public BufferedImage resizeImage(BufferedImage bImage, int width, int height) {
+	   
+	   BufferedImage resizedImage = new BufferedImage(width, height,  BufferedImage.TYPE_INT_BGR);
+	   Graphics2D g = resizedImage.createGraphics();
+	   g.drawImage(bImage, 0, 0, width, height, null);
+	   g.dispose();	
+	   
+	   return resizedImage;
+   }
 
 }
