@@ -43,7 +43,7 @@ public class JoinImageController {
 		ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
 		imgList.add(img1);
 		imgList.add(img2);
-		//imgList.add(img3);
+		imgList.add(img3);
 		imgList.add(img3);
 		imgList.add(img1);
 
@@ -142,10 +142,9 @@ public class JoinImageController {
         		
     	    	int offset = 2;
            	    
-    	    	int width = Collections.max(Arrays.asList ((img1.getWidth() + img2.getWidth() + img3.getWidth()), (img4.getWidth() + img5.getWidth())) ) + offset;
-           	    
-           	    
-        	    int height = Collections.max(Arrays.asList ((img1.getHeight() + img4.getHeight()), (img2.getHeight() + img5.getHeight()), img3.getHeight()) ) + offset;
+    	    	int width = Collections.max(Arrays.asList(img1.getWidth()+img2.getWidth()+img3.getWidth(),img4.getWidth()+img5.getWidth()))+ offset*2;
+    	    	
+        	    int height = (Collections.max(Arrays.asList(img1.getHeight(),img2.getHeight(),img3.getHeight())) + (Collections.max(Arrays.asList(img4.getHeight(),img5.getHeight())) + offset*2));
         	    
         	    newImage = new BufferedImage(width, height,
         	        BufferedImage.TYPE_INT_BGR);
@@ -155,9 +154,8 @@ public class JoinImageController {
         	    g2.drawImage(img1, null, 0, 0);
         	    g2.drawImage(img2, null, img1.getWidth() + offset, 0);
         	    g2.drawImage(img3, null, img1.getWidth()+img2.getWidth() + offset, 0);
-
         	    g2.drawImage(img4, null, 0, Collections.max(Arrays.asList(img1.getHeight(),img2.getHeight())) + offset);
-        	    g2.drawImage(img5, null, img1.getWidth() + offset, Collections.max(Arrays.asList(img1.getHeight(),img2.getHeight())) + offset);
+        	    g2.drawImage(img5, null, img4.getWidth() + offset, Collections.max(Arrays.asList(img1.getHeight(),img2.getHeight())) + offset);
         	    
         	    
         	    g2.dispose();
