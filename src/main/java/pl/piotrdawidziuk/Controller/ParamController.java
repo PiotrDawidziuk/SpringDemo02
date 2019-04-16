@@ -26,5 +26,12 @@ public class ParamController {
 	public String getOptionalFoos(@RequestParam(required = false) String id) { 
 	    return "ID: " + id;
 	}
+	
+	@GetMapping("/api/defaultfoos")
+	@ResponseBody
+	public String getDefaultFoos(@RequestParam(defaultValue = "test") String id) {
+	    return "ID: " + id;
+	}
+	
 
 }
