@@ -1,5 +1,6 @@
 package pl.piotrdawidziuk.Controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,12 @@ public class ParamController {
 	@ResponseBody
 	public String updateFoos(@RequestParam Map<String,String> allParams) {
 	    return "Parameters are " + allParams.entrySet();
+	}
+	
+	@GetMapping("/api/listoffoos")
+	@ResponseBody
+	public String getFoos(@RequestParam List<String> id) {
+	    return "IDs are " + id;
 	}
 	
 
