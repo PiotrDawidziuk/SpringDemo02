@@ -41,27 +41,18 @@ public class JoinImageController {
 						
 		ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
 
-		for (int i = 0; i < links.size(); i++) {
+		for (int i = 0; i < links.size() && i < 8; i++) {
 			String url = links.get(i);
 			BufferedImage img = ImageIO.read(new URL(url));
 			imgList.add(img);
 		}
-			
-		String url1 = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Toddy_Dog.jpg";
-		String url2 = "https://vignette.wikia.nocookie.net/uncyclopedia/images/b/be/Cat.JPG";
-		String url3 = "http://www.photo-dictionary.com/photofiles/list/4866/6405river_otter.jpg";
 		
-//		BufferedImage img1 = ImageIO.read(new URL(url1));
-//		BufferedImage img2 = ImageIO.read(new URL(url2));
-//		BufferedImage img3 = ImageIO.read(new URL(url3));
-		// imgList.add(img1);
-//		imgList.add(img2);
-//		imgList.add(img2);
-//		imgList.add(img2);
-//		imgList.add(img3);
-//		imgList.add(img3);
-//		imgList.add(img3);
-//		imgList.add(img3);
+		System.out.println(imgList.size());
+			
+//		String url1 = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Toddy_Dog.jpg";
+//		String url2 = "https://vignette.wikia.nocookie.net/uncyclopedia/images/b/be/Cat.JPG";
+//		String url3 = "http://www.photo-dictionary.com/photofiles/list/4866/6405river_otter.jpg";
+//	
 		
 		if (random == 1) {
 		Collections.shuffle(imgList);
