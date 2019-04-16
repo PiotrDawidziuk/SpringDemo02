@@ -50,11 +50,10 @@ public class ParamController {
 	
 	@GetMapping("test/params")
 	@ResponseBody
-	public String getParams(@RequestParam(name = "losowo", defaultValue = "0") int random, @RequestParam(name = "rozdzielczosc") String res, 
+	public String getParams(@RequestParam(name = "losowo", defaultValue = "0") int random, 
+			@RequestParam(name = "rozdzielczosc") String res, 
 			@RequestParam (name="zdjecia") List<String> links) {
-		
-		System.out.println(random+50);
-		
+				
 		return "Params are: \n is random: " + random+"\n resolution: "+res+ "\n links are: " +links;
 	}
 

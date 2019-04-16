@@ -18,6 +18,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -31,8 +32,11 @@ public class JoinImageController {
 	    }
 	
 	@GetMapping(value = "/get-joined", produces = MediaType.IMAGE_JPEG_VALUE)
-	public @ResponseBody byte[] getJoinedImage() throws IOException {
-		
+	public @ResponseBody byte[] getJoinedImage
+	(@RequestParam(name = "losowo", defaultValue = "0") int random,
+			@RequestParam(name = "rozdzielczosc", defaultValue = "2048x2048") String resString) 
+					throws IOException {
+						
 		String url1 = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Toddy_Dog.jpg";
 		String url2 = "https://vignette.wikia.nocookie.net/uncyclopedia/images/b/be/Cat.JPG";
 		String url3 = "http://www.photo-dictionary.com/photofiles/list/4866/6405river_otter.jpg";
@@ -41,21 +45,24 @@ public class JoinImageController {
 		BufferedImage img2 = ImageIO.read(new URL(url2));
 		BufferedImage img3 = ImageIO.read(new URL(url3));
 		ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-		imgList.add(img1);
+		imgList.add(img2);
+		imgList.add(img2);
 		imgList.add(img2);
 		imgList.add(img2);
 		imgList.add(img3);
-		imgList.add(img2);
-		imgList.add(img1);
+		imgList.add(img3);
 		imgList.add(img3);
 		imgList.add(img3);
 		
+		if (random == 1) {
 		Collections.shuffle(imgList);
-
+		}
 		
 		BufferedImage joinedImg = joinBufferedImage(imgList);
 		
-		joinedImg = resizeImage(joinedImg, 2048, 2048);
+		String[] res = resString.split("x",2);
+		
+		joinedImg = resizeImage(joinedImg, Integer.parseInt(res[0]), Integer.parseInt(res[1]));
 		
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		ImageIO.write(joinedImg, "jpg", os);
