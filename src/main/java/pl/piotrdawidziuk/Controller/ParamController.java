@@ -48,5 +48,10 @@ public class ParamController {
 	    return "IDs are " + id;
 	}
 	
+	@GetMapping("test/params")
+	@ResponseBody
+	public String getParams(@RequestParam(name = "losowo") boolean random, @RequestParam(name = "rozdzielczosc") String res) {
+		return "Params are: \n is random: " + random+"\n resolution: "+res;
+	}
 
 }
