@@ -20,5 +20,11 @@ public class ParamController {
 	public String addFoo(@RequestParam(name = "id") String fooId, @RequestParam String name) { 
 	    return "ID: " + fooId + " Name: " + name;
 	}
+	
+	@GetMapping("/api/optionalfoos")
+	@ResponseBody
+	public String getOptionalFoos(@RequestParam(required = false) String id) { 
+	    return "ID: " + id;
+	}
 
 }
