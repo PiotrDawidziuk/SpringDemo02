@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -34,25 +35,33 @@ public class JoinImageController {
 	@GetMapping(value = "/get-joined", produces = MediaType.IMAGE_JPEG_VALUE)
 	public @ResponseBody byte[] getJoinedImage
 	(@RequestParam(name = "losowo", defaultValue = "0") int random,
-			@RequestParam(name = "rozdzielczosc", defaultValue = "2048x2048") String resString) 
+			@RequestParam(name = "rozdzielczosc", defaultValue = "2048x2048") String resString,
+			@RequestParam (name="zdjecia") List<String> links)
 					throws IOException {
 						
+		ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
+
+		for (int i = 0; i < links.size(); i++) {
+			String url = links.get(i);
+			BufferedImage img = ImageIO.read(new URL(url));
+			imgList.add(img);
+		}
+			
 		String url1 = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Toddy_Dog.jpg";
 		String url2 = "https://vignette.wikia.nocookie.net/uncyclopedia/images/b/be/Cat.JPG";
 		String url3 = "http://www.photo-dictionary.com/photofiles/list/4866/6405river_otter.jpg";
 		
-		BufferedImage img1 = ImageIO.read(new URL(url1));
-		BufferedImage img2 = ImageIO.read(new URL(url2));
-		BufferedImage img3 = ImageIO.read(new URL(url3));
-		ArrayList<BufferedImage> imgList = new ArrayList<BufferedImage>();
-		imgList.add(img2);
-		imgList.add(img2);
-		imgList.add(img2);
-		imgList.add(img2);
-		imgList.add(img3);
-		imgList.add(img3);
-		imgList.add(img3);
-		imgList.add(img3);
+//		BufferedImage img1 = ImageIO.read(new URL(url1));
+//		BufferedImage img2 = ImageIO.read(new URL(url2));
+//		BufferedImage img3 = ImageIO.read(new URL(url3));
+		// imgList.add(img1);
+//		imgList.add(img2);
+//		imgList.add(img2);
+//		imgList.add(img2);
+//		imgList.add(img3);
+//		imgList.add(img3);
+//		imgList.add(img3);
+//		imgList.add(img3);
 		
 		if (random == 1) {
 		Collections.shuffle(imgList);
