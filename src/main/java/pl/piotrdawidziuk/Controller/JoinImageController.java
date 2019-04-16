@@ -46,9 +46,7 @@ public class JoinImageController {
 			BufferedImage img = ImageIO.read(new URL(url));
 			imgList.add(img);
 		}
-		
-		System.out.println(imgList.size());
-			
+					
 //		String url1 = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Toddy_Dog.jpg";
 //		String url2 = "https://vignette.wikia.nocookie.net/uncyclopedia/images/b/be/Cat.JPG";
 //		String url3 = "http://www.photo-dictionary.com/photofiles/list/4866/6405river_otter.jpg";
